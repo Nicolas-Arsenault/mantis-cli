@@ -147,7 +147,10 @@ cd mantis-cli
 bun install          # or: npm install
 bun run build        # bundles bin/mantis.js -> dist/mantis.js
 node dist/mantis.js --version
+npm test             # node --test
 ```
+
+When a command action fails after network I/O (e.g. MCP calls), report the error and set `process.exitCode = 1` (or `ui.fail()`) instead of calling `process.exit()`: forcing an exit while HTTP handles are still closing crashes Node on Windows with a libuv `UV_HANDLE_CLOSING` assertion.
 
 Publishing is automated: push a `v*` tag and the [GitHub Actions workflow](.github/workflows/publish-npm.yml) builds the bundle and publishes to npm.
 

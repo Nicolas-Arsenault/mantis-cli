@@ -387,7 +387,7 @@ toolsCmd.command('list', { isDefault: true }).description('List tools (JSON)').a
 
     console.error(JSON.stringify({ error: e.message }));
 
-    process.exit(1);
+    process.exitCode = 1;
 
   }
 
@@ -417,7 +417,7 @@ program
 
     } catch (e) {
 
-      ui.die(e.message || String(e));
+      ui.fail(e.message || String(e));
 
     }
 
